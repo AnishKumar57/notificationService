@@ -5,9 +5,7 @@ const {db_uri}= require('./config/db.config');
 const mongoose = require('mongoose');
 const notificationRoutes = require('./routes/ticketNotification.routes');
 const bodyParser = require('body-parser');
-const sendGridMail = require('./notifier/mailerService');
-const { EMAIL_ADDRESS } = require('./config/mailer.config');
-const nodemailer = require("nodemailer");
+
 
 
 
@@ -24,7 +22,6 @@ app.listen(PORT, ()=> {
 
     // connect mongoose with mongodb
     mongoose.connect(db_uri);
-    sendMail();
 
     // verify connection configuration
 // transporter.verify(function (error, success) {
@@ -38,37 +35,21 @@ app.listen(PORT, ()=> {
 
 });
 
-// function sendMail(){
-// const message = {
-//     from: EMAIL_ADDRESS,
-//     to: EMAIL_ADDRESS,
-//     subject: "Message tittle",
-//     text: "Plain text",
-//     html: "<p>HTML Versio Text</p>"
-//   };
-//   transporter.sendMail(message,(err, info)=>{
-//     if(err){
-//       console.log("error", err);
-//     }else{
-//       console.log("info", info);
-//     }
-//   });
-// }
 
-function sendMail() {
-const msg = {
-  to: EMAIL_ADDRESS, // Change to your recipient
-  from: EMAIL_ADDRESS, // Change to your verified sender
-  subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-}
-sendGridMail
-  .send(msg)
-  .then(() => {
-    console.log('Email sent')
-  })
-  .catch((error) => {
-    console.error(error)
-  });
-};
+// function sendMail() {
+// const msg = {
+//   to: EMAIL_ADDRESS, // Change to your recipient
+//   from: EMAIL_ADDRESS, // Change to your verified sender
+//   subject: 'Sending with SendGrid is Fun',
+//   text: 'and easy to do anywhere, even with Node.js',
+//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// }
+// sendGridMail
+//   .send(msg)
+//   .then(() => {
+//     console.log('Email sent')
+//   })
+//   .catch((error) => {
+//     console.error(error)
+//   });
+// };
